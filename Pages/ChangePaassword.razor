@@ -1,0 +1,44 @@
+﻿@page "/change_password"
+@*<PageTitle>Index</PageTitle>
+
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <SurveyPrompt Title="How is Blazor working for you?" />*@
+@inject NavigationManager NavigationManager
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4 p-0 m-0">
+        <section  class="pt-5 vh-100">
+            <div class="description">INTELLIGENT SURVEILLANCE SYSTEM<br> Change Password</div>
+            
+            <div class="container">
+                    <div class="form-group">
+            <label for="usr">Name:</label>
+            <input type="text" class="form-control" id="usr">
+            </div>
+            <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd">
+            </div>
+            <button class="start-trial my-3 col-12" @onclick="Home">Save</button>
+
+            </div>
+
+        </section>
+    </div>
+    <div class="col-4 p-0 m-0">
+
+            
+
+    </div>
+</div>
+
+@code {
+    void Home()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}
+

@@ -1,0 +1,82 @@
+    @page "/new_user"
+    @inject NavigationManager NavigationManager
+    <div class="form-body container pt-5 my-5 col-9">
+        <div class="row">
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items">
+                        <h3>Create new user</h3>
+                        <p>Fill in the data below.</p>
+                        <form class="requires-validation" novalidate>
+                              <div class="row">
+                                   <div class="col-6">
+
+                                        <div class="col-md-12">
+                                             <input class="form-control" type="text" name="name" placeholder="First Name" required>
+                                             <div class="valid-feedback">Username field is valid!</div>
+                                             <div class="invalid-feedback">Username field cannot be blank!</div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                             <select class="form-select mt-3" required>
+                                                  <option selected disabled value="">Role</option>
+                                                  <option value="jweb">Developer</option>
+                                                  <option value="sweb">Admin</option>
+                                                  <option value="pmanager">Regular</option>
+                                             </select>
+                                             <div class="valid-feedback">You selected a position!</div>
+                                             <div class="invalid-feedback">Please select a position!</div>
+                                        </div>
+
+
+                                        <div class="col-md-12 mt-3">
+                                             <input class="form-control" type="text" name="phone" placeholder="Phone number" required>
+                                             <div class="valid-feedback">Password field is valid!</div>
+                                             <div class="invalid-feedback">Password field cannot be blank!</div>
+                                        </div>
+
+
+                                        <div class="form-button mt-3">
+                                             <button id="submit" @onclick="Save" class="start-trial my-3 col-12">Register</button>
+                                        </div>
+                                   </div><div class="col-6">
+
+                                        <div class="col-md-12">
+                                             <input class="form-control" type="text" name="name" placeholder="Last Name" required>
+                                             <div class="valid-feedback">Username field is valid!</div>
+                                             <div class="invalid-feedback">Username field cannot be blank!</div>
+                                        </div>
+
+                                        <div class="col-md-12 mt-3">
+                                             <input class="form-control" type="email" name="email" placeholder="E-mail Address" required>
+                                             <div class="valid-feedback">Email field is valid!</div>
+                                             <div class="invalid-feedback">Email field cannot be blank!</div>
+                                        </div>
+
+                                        <div class="col-md-12 mt-3">
+                                             <input class="form-control" type="numbers" name="email" placeholder="ID" required>
+                                             <div class="valid-feedback">ID!</div>
+                                             <div class="invalid-feedback">Email field cannot be blank!</div>
+                                        </div>
+
+                                        <div class="form-button mt-3">
+                                             <button id="submit" @onclick="Home" class="start-trial my-3 col-12">Cancel</button>
+                                        </div>
+                                   </div>
+                              </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@code {
+    private void Home()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+     private void Save()
+     {
+          NavigationManager.NavigateTo("/manage_users");
+     }
+}
