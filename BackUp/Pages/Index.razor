@@ -1,0 +1,60 @@
+﻿@page "/"
+@*<PageTitle>Index</PageTitle>
+
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <SurveyPrompt Title="How is Blazor working for you?" />*@
+
+@inject NavigationManager NavigationManager
+
+
+
+<div class="row">
+    @* <div class="col-1"></div> *@
+    <div class="col-9 p-0 m-0">
+        <section  class=" vh-100">
+            <div class="title">INTELLIGENTT SURVEILLANCE<br>  SYSTEM.</div>
+            <div class="description"> Welcome to the intelligent surveillance system <br> this system uses artificial intelligence to detect activity, detect thef in the computer lab </div>
+            <div class="cta">
+                <div class="start-trial m-2 p-3" @onclick="ManageUsers">Manage users</div>
+                <div class="start-trial m-2  p-3" @onclick="VideoPanel">View footage videos</div>
+                <div class="start-trial m-2  p-3" @onclick="Notifications">View notifications</div>
+                <div class="start-trial m-2  p-3">Reset System</div>
+            </div>
+        </section>
+    </div>
+    <div class="col-2 p-0 m-0">
+        <div class="h-75 pt-5 mt-5">
+            <div class="start-trial m-2 p-2 col-12"> Admin Email</div>
+            <button class="start-trial  m-2 p-2 col-12" @onclick="ChangePassword">Change Password</button>
+            <div class="start-trial m-2 p-2 col-12">Sign Out</div>
+        </div>
+        <div class="h-25">
+            <div class="start-trial m-2">About</div>
+            <div class="start-trial m-2">Contact</div> 
+        </div>
+            
+
+    </div>
+</div>
+
+@code {
+    void ChangePassword()
+    {
+        NavigationManager.NavigateTo("/change_password");
+    }
+    void VideoPanel()
+    {
+        NavigationManager.NavigateTo("/video_panel");
+    }
+    void ManageUsers()
+    {
+        NavigationManager.NavigateTo("/manage_users");
+    }
+    void Notifications()
+    {
+        NavigationManager.NavigateTo("/notifications");
+    }
+}
