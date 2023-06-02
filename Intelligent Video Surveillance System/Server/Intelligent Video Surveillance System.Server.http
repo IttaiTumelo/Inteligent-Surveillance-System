@@ -1,0 +1,9 @@
+﻿@Intelligent Video Surveillance System.Server_HostAddress = https://localhost:7217
+
+GET {{Intelligent Video Surveillance System.Server_HostAddress}}/weatherforecast
+
+###
+
+GET {{Intelligent Video Surveillance System.Server_HostAddress}}/weatherforecast
+
+###

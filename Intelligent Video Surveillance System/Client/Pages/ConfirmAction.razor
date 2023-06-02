@@ -1,0 +1,49 @@
+<style>
+    #custom-modal{
+        position : absolute;
+        z-index: 1000;
+    }
+
+    
+</style>
+
+<div class="card text-center @Show">
+    <div class="card-header">
+        <h5 class="modal-title">@Title</h5>
+    </div>
+    <div class="card-body">
+        <p>@PromptText</p>
+    </div>
+    <div class="card-footer text-muted">
+        <button type="button" class="btn @ConitnueClass" @onclick="OnContinue">Continue</button>
+        <button type="button" class="btn btn-secondary" @onclick="OnCancel" data-dismiss="modal">Close</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Show { get; set; } = "visually-hidden";
+
+    [Parameter]
+    public EventCallback OnClose { get; set; }
+
+    [Parameter]
+    public EventCallback OnContinue { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public bool IsWarning { get; set; } = true;
+
+    [Parameter]
+    public string Title { get; set; } = "You have not set the title yet";
+
+    [Parameter]
+    public string PromptText { get; set; } = "Write the promp to the user here";
+
+    public string ConitnueClass => IsWarning ? "btn-danger" : "btn-success";
+
+
+
+}

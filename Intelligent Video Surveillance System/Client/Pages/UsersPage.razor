@@ -1,0 +1,111 @@
+@page "/manage_users"
+@*<PageTitle>Index</PageTitle>
+
+    <h1>Hello, world!</h1>
+
+    Welcome to your new app.
+
+    <SurveyPrompt Title="How is Blazor working for you?" />*@
+@inject NavigationManager NavigationManager
+@* <button class="start-trial my-3 col-1" @onclick="Home">Back</button> *@
+<div class="container pt-3">
+     <div class="row">
+          <div class="col-3">
+               <button disabled class="start-trial my-3 col-12" @onclick="Home">select all users</button>
+          </div>
+          <div class="col-6">
+            <div class="title-npt-sm">User Panel</div>
+          </div>
+          <div class="col-3">
+                    
+            <div class="input-group col-12">
+              <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light col-12">
+              <div class="input-group-append">
+                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+     </div>
+     <div class="row container">
+                              
+          <table class="table">
+              <thead>
+                   <th></th>
+                   <th>Firstname</th>
+                   <th>Lastname</th>
+                   <th>Email</th>
+                   <th>Id</th>
+                   <th>Role</th>
+              </thead>
+              <tbody>
+                    @foreach (var user in Users)
+                   {
+                        <tr>
+                             <td><input type="checkbox" /></td>
+                             <td data-label="first-name">@user.FirstName</td>
+                             <td data-label="last-name">@user.LastName</td>
+                             <td data-label="email">@user.Email</td> 
+                             <td data-label="last-name">@user.Id</td>
+                             <td data-label="last-name">@user.Role</td>
+                             <td data-label="actions">
+                                <button class="btn btn-primary" @onclick="()=>Edit(user)">Edit</button>
+                                <button class="btn btn-danger" @onclick="()=>TaskAskToDelete(user)">Delete</button>
+                             </td>
+                             <td>...</td>
+                        </tr>
+                   }
+              </tbody>
+          </table>
+          <button class="start-trial m-2" @onclick="NewUser">Add new user</button>
+     </div>
+</div>
+
+<ConfirmAction Show="@show" OnClose="CloseDialogue" OnContinue="Delete"/>
+
+
+@code {
+    public string show = "visually-hidden";
+    void Home()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+    void NewUser()
+    {
+        NavigationManager.NavigateTo("/new_user");
+    }
+    async Task Edit(UserEntity user) => throw new NotImplementedException();
+
+    public UserEntity selectedUser;
+
+    void TaskAskToDelete(UserEntity user)
+    {
+        selectedUser = user;
+        show = "show";
+        StateHasChanged();
+        Console.WriteLine($"the value of show is {show}");
+    }
+    async Task Delete()
+    {
+        var result = await httpClient.DeleteAsync($"https://localhost:7217/api/User/{selectedUser.Id}");
+        Users = result is not null ? result.Content.ReadFromJsonAsync<List<UserEntity>>().Result : new List<UserEntity>();
+        Console.WriteLine(result);
+        StateHasChanged();
+    }
+
+    void CloseDialogue()
+    {
+        show = "d-none";
+        StateHasChanged();
+    }
+    HttpClient httpClient = new();
+    List<UserEntity> Users { get; set; } = new();
+    string error = string.Empty;
+    protected override async void OnInitialized()
+    {
+        var result = await httpClient.GetAsync($"https://localhost:7217/api/User/get_all");
+        Users = result is not null ? result.Content.ReadFromJsonAsync<List<UserEntity>>().Result : new List<UserEntity>();
+        Console.WriteLine(result);
+        StateHasChanged();
+    }
+}
+

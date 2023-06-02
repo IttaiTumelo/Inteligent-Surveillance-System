@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Intelligent_Video_Surveillance_System.Client.props" />
+</Project>

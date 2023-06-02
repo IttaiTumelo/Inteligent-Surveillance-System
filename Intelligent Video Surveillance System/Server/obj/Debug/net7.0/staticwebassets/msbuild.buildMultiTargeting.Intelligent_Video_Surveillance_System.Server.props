@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Intelligent_Video_Surveillance_System.Server.props" />
+</Project>
