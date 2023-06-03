@@ -1,13 +1,5 @@
 @page "/manage_users"
-@*<PageTitle>Index</PageTitle>
-
-    <h1>Hello, world!</h1>
-
-    Welcome to your new app.
-
-    <SurveyPrompt Title="How is Blazor working for you?" />*@
 @inject NavigationManager NavigationManager
-@* <button class="start-trial my-3 col-1" @onclick="Home">Back</button> *@
 <div class="container pt-3">
      <div class="row">
           <div class="col-3">
@@ -60,7 +52,7 @@
      </div>
 </div>
 
-<ConfirmAction Show="@show" OnClose="CloseDialogue" OnContinue="Delete"/>
+<ConfirmAction Show="@show" OnClose="CloseDialogue" OnContinue="Delete" OnCancel="CloseDialogue"/>
 
 
 @code {
@@ -87,7 +79,9 @@
     async Task Delete()
     {
         var result = await httpClient.DeleteAsync($"https://localhost:7217/api/User/{selectedUser.Id}");
-        Users = result is not null ? result.Content.ReadFromJsonAsync<List<UserEntity>>().Result : new List<UserEntity>();
+        var user = result is not null ? result.Content.ReadFromJsonAsync<UserEntity>().Result : new UserEntity();
+        if (user is null) throw new Exception("The user was not deleted");
+        else await GetUsers();
         Console.WriteLine(result);
         StateHasChanged();
     }
@@ -102,10 +96,17 @@
     string error = string.Empty;
     protected override async void OnInitialized()
     {
+        await GetUsers();
+    }
+
+    async Task GetUsers()
+    {
         var result = await httpClient.GetAsync($"https://localhost:7217/api/User/get_all");
         Users = result is not null ? result.Content.ReadFromJsonAsync<List<UserEntity>>().Result : new List<UserEntity>();
         Console.WriteLine(result);
         StateHasChanged();
+        //this makes sure the dialogue is closed when we collect the udated list of users
+        CloseDialogue();
     }
 }
 

@@ -24,5 +24,20 @@
         {
             return Ok(_dataContext.Users.ToList());
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult<UserEntity> DeleteUser(int id)
+        {
+            var user = _dataContext.Users.Find(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _dataContext.Users.Remove(user);
+            _dataContext.SaveChanges();
+
+            return Ok(user);
+        }
     }
 }
