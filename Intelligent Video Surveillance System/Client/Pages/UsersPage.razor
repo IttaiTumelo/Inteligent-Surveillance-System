@@ -48,7 +48,6 @@
                              <td data-label="last-name">@user.Id</td>
                              <td data-label="last-name">@user.Role</td>
                              <td data-label="actions">
-                                <button class="btn btn-primary" @onclick="()=>Edit(user)">Edit</button>
                                 <button class="btn btn-danger" @onclick="()=>TaskAskToDelete(user)">Delete</button>
                              </td>
                              <td>...</td>
@@ -68,7 +67,7 @@
     void Home()
     {
         NavigationManager.NavigateTo("/");
-    }
+    }  
     void NewUser()
     {
         NavigationManager.NavigateTo("/new_user");

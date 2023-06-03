@@ -18,4 +18,11 @@ namespace Intelligent_Video_Surveillance_System.Shared.Models
     {
         admin, superadmin
     }
+
+    // Data Transfer Object for Login
+    public class UserLoginDTo
+    {
+        public string Email { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
+    }
 }
