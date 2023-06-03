@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Intelligent Video Surveillance System",
-    "\\Intelligent Video Surveillance System\\Client",
-    "\\Intelligent Video Surveillance System\\Client\\Pages"
+    "\\Intelligent Video Surveillance System"
   ],
-  "SelectedNode": "\\Intelligent Video Surveillance System\\Client\\Pages\\UsersPage.razor",
+  "SelectedNode": "\\Intelligent Video Surveillance System\\Intelligent Video Surveillance System.sln",
   "PreviewInSolutionExplorer": false
 }
